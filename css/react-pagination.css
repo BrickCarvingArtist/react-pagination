@@ -1,0 +1,27 @@
+::selection{
+	background:transparent;
+}
+.pagination{
+	text-align:center;
+}
+.pagination li{
+	display:inline-block;
+	margin-right:8px;
+	padding:4px 8px;
+	font-size:14px;
+	border-radius:2px;
+}
+.pagination .normal{
+	color:#979494;
+	background-color:#fff;
+	border:1px solid #b3b3b3;
+}
+.pagination .normal, .pagination .current{
+	cursor:pointer
+}
+.pagination .normal:hover, .pagination .current{
+	padding:5px 9px;
+	color:#fff;
+	background-color:#378de9;
+	border:none;
+}

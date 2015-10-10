@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>React-pagination</title>
+	</head>
+	<body>
+		<div id="pagination"></div>
+		<script src="js/react.min.js"></script>
+		<script src="js/react-pagination.js"></script>
+		<script>
+			/*If jsx
+			React.render(
+				<Pagination url="/api/getproduct" index="1" size="10" supertype="" type="" status="" />,
+				document.querySelector("#pagination")
+			);*/
+			/*If js*/
+			React.render(
+				React.createElement(Pagination, {url: "/api/getproduct", index: "1", size: "10", supertype: "", type: "", status: ""}),
+				document.querySelector("#pagination")
+			);
+			//此插件内supertype, type, status可以换成任何其他需要往接口url里传给服务器的参数
+		</script>
+	</body>
+</html>
