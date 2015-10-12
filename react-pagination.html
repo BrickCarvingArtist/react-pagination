@@ -5,21 +5,100 @@
 		<title>React-pagination</title>
 	</head>
 	<body>
+		<div class="products"></div>
 		<div id="pagination"></div>
 		<script src="js/react.min.js"></script>
 		<script src="js/react-pagination.js"></script>
 		<script>
-			/*If jsx
+			//If jsx
+			//需要被页码所更新的内容区块,以react里的随便新建的Product类为例
+			var Product = React.createClass({
+				render : function(){
+					return (
+						<div>
+							{this.props.data.name}
+						</div>
+					);
+				}
+			});
+			//渲染页码
 			React.render(
-				<Pagination url="/api/getproduct" index="1" size="10" supertype="" type="" status="" />,
+				<Pagination
+					url="/api/getproduct"
+					data={
+						{
+							index : 1,
+							size : 10,
+							data : {
+								name : "页码"
+							}
+						}
+					}
+					index="1"
+					size="10"
+					supertype=""
+					type=""
+					status=""
+					callback={
+						function(componentState){
+							React.render(
+								<Product data={componentState.data} />,
+								document.querySelector(".products")
+							);
+						}
+					} />,
 				document.querySelector("#pagination")
 			);*/
-			/*If js*/
+			//If js
+			//需要被页码所更新的内容区块,以react里的随便新建的Product类为例
+			var Product = React.createClass({displayName: "Product",
+				render : function(){
+					return (
+						React.createElement("div", null, 
+							this.props.data.name
+						)
+					);
+				}
+			});
 			React.render(
-				React.createElement(Pagination, {url: "/api/getproduct", index: "1", size: "10", supertype: "", type: "", status: ""}),
+				React.createElement(Pagination, {
+					url : "/api/getproduct",
+					data : {
+						index : 1,
+						total : 10,
+						data : {
+							name : "页码"
+						}
+					}
+					index : "1",
+					size : "10",
+					supertype : "",
+					type : "",
+					status : "",
+					callback :
+						function(componentState){
+							React.render(
+								React.createElement(Product, {data: componentState.data}),
+								document.querySelector(".products")
+							);
+						}
+					}),
 				document.querySelector("#pagination")
 			);
-			//此插件内supertype, type, status可以换成任何其他需要往接口url里传给服务器的参数
+			//此插件接口内supertype, type, status可以换成任何其他需要往接口url里传给服务器的参数
+			//1.初始化插件并请求服务端数据,则插件的接口需要传入服务端服务端的请求地址url参数
+			//2.插件外部上下文已经请求了数据,插件内不再在初始化请求数据,而是直接从服务端拿数据,则插件的接口需要在data参数里传入外部上下文的数据,并且需要在url参数里传入点击页码时往服务端的请求地址
+			//比如以nodejs为例,服务端接口如下
+			// app.get("/api/getproduct", function(req, res){
+			// 	res.json({
+			// 		index : parseInt(req.query.index) || 1,
+			// 		size : parseInt(req.query.size) || 10,
+			// 		total : 10,
+			// 		data : {
+			// 			name : "卧槽" + (parseInt(req.query.index) || 1)
+			// 		}
+			// 	});
+			// });
 		</script>
 	</body>
 </html>

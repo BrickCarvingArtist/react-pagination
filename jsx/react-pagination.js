@@ -1,34 +1,34 @@
-var Product = React.createClass({displayName: "Product",
-	render : function(){
-		return (
-			React.createElement("div", null, 
-				this.props.data.name
-			)
-		);
-	}
+var Product = React.createClass({
+    render : function(){
+        return (
+            <div>
+                {this.props.data.name}
+            </div>
+        );
+    }
 });
-var Option = React.createClass({displayName: "Option",
-	getInitialState : function(){
-		return {
-			index : this.props.index
-		};
-	},
-	componentWillReceiveProps : function(nextProps){
-		this.setState({
-			index : nextProps.index
-		});
-	},
-	render : function(){
-		return (
-			React.createElement("li", {className: this.props.className}, 
-				this.props.title
-			)
-		);
-	}
+var Option = React.createClass({
+    getInitialState : function(){
+        return {
+            index : this.props.index
+        };
+    },
+    componentWillReceiveProps : function(nextProps){
+        this.setState({
+            index : nextProps.index
+        });
+    },
+    render : function(){
+        return (
+            <li className={this.props.className}>
+                {this.props.title}
+            </li>
+        );
+    }
 });
-var Pagination = React.createClass({displayName: "Pagination",
-	getInitialState : function(){
-		var index = parseInt(this.props.index),
+var Pagination = React.createClass({
+    getInitialState : function(){
+        var index = parseInt(this.props.index),
             total = this.props.data ? parseInt(this.props.data.total) : 1,
             size = parseInt(this.props.size);
         return this.props.data ? {
@@ -43,8 +43,8 @@ var Pagination = React.createClass({displayName: "Pagination",
             total : total,
             size : size || 1
         };
-	},
-	getData : function(setting){
+    },
+    getData : function(setting){
         var _setting = this.props;
         for(var i in setting){
             _setting[i] = setting[i];
@@ -59,9 +59,9 @@ var Pagination = React.createClass({displayName: "Pagination",
             url : url.replace(/&/, "?"),
             success : function(data){
                 var index = data.index,
-					total = data.total,
-					size = data.size,
-					data = data.data;
+                    total = data.total,
+                    size = data.size,
+                    data = data.data;
                 this.setState({
                     index : index,
                     prev : index >> 1 ? index - 1 : 0,
@@ -81,9 +81,9 @@ var Pagination = React.createClass({displayName: "Pagination",
     },
     resetHandler : function(){
         var _this = this,
-			size = this.state.size,
-			total = this.state.total,
-			option;
+            size = this.state.size,
+            total = this.state.total,
+            option;
         for(var i in this.refs){
             option = this.refs[i].getDOMNode();
             option.index = this.refs[i].state.index;
@@ -97,8 +97,8 @@ var Pagination = React.createClass({displayName: "Pagination",
             };
         }
     },
-	componentWillMount : function(){
-		if(this.props.data){
+    componentWillMount : function(){
+        if(this.props.data){
             try{
                 this.props.callback(this.state);
             }catch(e){
@@ -107,26 +107,26 @@ var Pagination = React.createClass({displayName: "Pagination",
         }else{
             this.getData(this.props);
         }
-	},
-	componentDidMount : function(){
+    },
+    componentDidMount : function(){
         this.resetHandler();
     },
     componentDidUpdate : function(){
         this.resetHandler();
     },
-	renderPageNumber : function(page, i, index){
+    renderPageNumber : function(page, i, index){
         page.push(
-			React.createElement(Option, {className: (index == i + 1 ? "current" : "normal") + " page", title: i + 1, index: i + 1, ref: "p" + (i + 1)})
-		);
+            <Option className={(index == i + 1 ? "current" : "normal") + " page"} title={i + 1} index={i + 1} ref={"p" + (i + 1)} />
+        );
     },
-	render : function(){
-		var pagination,
-			page = [],
-			index = this.state.index,
-			total = this.state.total;
+    render : function(){
+        var pagination,
+            page = [],
+            index = this.state.index,
+            total = this.state.total;
         if(total >> 1){
-			page.push(React.createElement(Option, {className: "normal prev", title: "上一页", index: this.state.prev || 0, ref: "prev"}));
-			if(total <= 5){
+            page.push(<Option className="normal prev" title="上一页" index={this.state.prev || 0} ref="prev" />);
+            if(total <= 5){
                 for (var i = 0; i < total; i++){
                     this.renderPageNumber(page, i, index);
                 }
@@ -151,12 +151,12 @@ var Pagination = React.createClass({displayName: "Pagination",
                 }
                 this.renderPageNumber(page, total - 1, index);
             }
-            page.push(React.createElement(Option, {className: "normal next", title: "下一页", index: this.state.next || 2, ref: "next"}));
-		}
-		return (
-			React.createElement("ul", {className: "pagination"}, 
-				page
-			)
-		);
-	}
+            page.push(<Option className="normal next" title="下一页" index={this.state.next || 2} ref="next" />);
+        }
+        return (
+            <ul className="pagination">
+                {page}
+            </ul>
+        );
+    }
 });
