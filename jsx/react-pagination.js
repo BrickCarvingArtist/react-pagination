@@ -136,15 +136,15 @@ var Pagination = React.createClass({
                     for(var i = 1; i < 4; i++){
                         this.renderPageNumber(page, i, index);
                     }
-                    page.push(React.createElement("li", null, "..."));
+                    page.push(<li>...</li>);
                 }else if(index < total - 2){
-                    page.push(React.createElement("li", null, "..."));
+                    page.push(<li>...</li>);
                     for(var i = index - 2; i < index + 1; i++){
                         this.renderPageNumber(page, i, index);
                     }
-                    page.push(React.createElement("li", null, "..."));
+                    page.push(<li>...</li>);
                 }else{
-                    page.push(React.createElement("li", null, "..."));
+                    page.push(<li>...</li>);
                     for (var i = total - 4; i < total - 1; i++){
                         this.renderPageNumber(page, i, index);
                     }
