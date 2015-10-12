@@ -67,3 +67,7 @@ A high render quality pagination component base on React.js
 			}
 		});
 	});
+## Notice
+###Arguments in the interface like `supertype`, `type` and `status` can be changed into any other arguments which the server side need.
+1. If you wanna initialize this component and make a request to get data from server side the same time, make sure you write down the `url` in the interface.
+2. If you've got data outer this component and just wanna send the data into it, make sure you write both the `url` and the `data` down in the interface so that it will not send a request the first time you initialize it and send the requests only on your click events.
