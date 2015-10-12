@@ -57,13 +57,13 @@ A high render quality pagination component base on React.js
 	);
 ## Server Interface
 ### If NodeJS
-app.get("/api/getproduct", function(req, res){
-	res.json({
-		index : parseInt(req.query.index) || 1,
-		size : parseInt(req.query.size) || 10,
-		total : 10,
-		data : {
-			name : "page" + (parseInt(req.query.index) || 1)
-		}
+	app.get("/api/getproduct", function(req, res){
+		res.json({
+			index : parseInt(req.query.index) || 1,
+			size : parseInt(req.query.size) || 10,
+			total : 10,
+			data : {
+				name : "page" + (parseInt(req.query.index) || 1)
+			}
+		});
 	});
-});
