@@ -1,4 +1,7 @@
 # React-pagination
+[![Issue Stats](http://issuestats.com/github/BrickCarvingArtist/React-pagination/badge/pr?style=flat)](http://issuestats.com/github/BrickCarvingArtist/React-pagination)
+[![Issue Stats](http://issuestats.com/github/BrickCarvingArtist/React-pagination/badge/issue?style=flat)](http://issuestats.com/github/BrickCarvingArtist/React-pagination)
+
 A high render quality pagination component base on React.js
 ## JS Interface
 ### If JSX
