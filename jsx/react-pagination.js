@@ -88,7 +88,7 @@ var Pagination = React.createClass({
             option = this.refs[i].getDOMNode();
             option.index = this.refs[i].state.index;
             option.onclick = function(){
-                if(this.index && this.index <= total){
+                if(this.index && this.index <= total && this.index != _this.state.index){
                     _this.getData({
                         index: this.index,
                         size: size
@@ -110,6 +110,12 @@ var Pagination = React.createClass({
     },
     componentDidMount : function(){
         this.resetHandler();
+    },
+    shouldComponentUpdate : function(nextProps, nextState){
+        var index = this.state.index,
+            size = this.state.size,
+            total = this.state.total;
+        return index != nextState.index || size != nextState.size || total != nextState.total;
     },
     componentDidUpdate : function(){
         this.resetHandler();
