@@ -46,7 +46,7 @@ React.render(
 			data : {
 				name : "page"
 			}
-		}
+		},
 		index : "1",
 		size : "10",
 		supertype : "",
